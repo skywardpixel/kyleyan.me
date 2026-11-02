@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kyle Yan</title>
+<meta name="description" content="Kyle Yan builds small, quiet tools. Based in Kirkland, Washington.">
+<meta name="theme-color" content="#F5F1E8" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#14161B" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preload" href="fonts/shippori-mincho-400.woff2" as="font" type="font/woff2" crossorigin>
+<script>
+  // Runs before first paint so a saved theme never flashes.
+  (function () {
+    var saved = null;
+    try { saved = localStorage.getItem("theme"); } catch (e) {}
+    var dark = saved ? saved === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+    document.documentElement.dataset.theme = dark ? "dark" : "light";
+  })();
+</script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="top">
+  <nav aria-label="Main">
+    <a href="#works">Works</a>
+    <a href="https://skyward.moe">Blog</a>
+    <a href="https://github.com/skywardpixel">GitHub</a>
+    <button id="theme" class="theme" type="button" aria-label="Switch to dark mode" hidden>
+      <span lang="ja" aria-hidden="true">夜</span>
+    </button>
+  </nav>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="hero-text">
+      <h1>Kyle Yan<span class="seal" lang="ja" aria-hidden="true">厳愷誠</span></h1>
+      <p class="lede">I work at Google and live in Kirkland, Washington. After hours I make small tools, mostly for myself.</p>
+      <p class="aside">Embracing vibe coding and having a good time.</p>
+    </div>
+
+    <p class="season" id="season" hidden>
+      <span class="season-ja" lang="ja" id="season-ja"></span>
+      <span class="season-en" id="season-en"></span>
+    </p>
+
+    <div class="sky" aria-hidden="true">
+      <canvas id="sky"></canvas>
+    </div>
+  </section>
+
+  <section class="works" id="works" aria-labelledby="works-title">
+    <h2 id="works-title"><span lang="ja" class="tate" aria-hidden="true">作品</span><span class="en">Works</span></h2>
+
+    <ol class="list">
+      <li class="row">
+        <span class="num" lang="ja" aria-hidden="true">一</span>
+        <div>
+          <h3><a href="https://github.com/skywardpixel/Yami">Yami</a></h3>
+          <p>A minimal menu bar client for mihomo. One subscription, one core, one proxy switch. There is also a <a class="inner" href="https://github.com/skywardpixel/WinYami">Windows version</a>.</p>
+        </div>
+        <span class="meta"><span>Swift, C#</span> <span>2026</span></span>
+      </li>
+      <li class="row">
+        <span class="num" lang="ja" aria-hidden="true">二</span>
+        <div>
+          <h3><a href="https://github.com/skywardpixel/forever-keymap">Forever Keymap</a></h3>
+          <p>Plan your WoW Forever action bars and keybindings before launch, then check them on a keyboard view. <a class="inner" href="https://forever-keymap.kyleyan.workers.dev">Open it</a>.</p>
+        </div>
+        <span class="meta"><span>TypeScript</span> <span>2026</span></span>
+      </li>
+      <li class="row">
+        <span class="num" lang="ja" aria-hidden="true">三</span>
+        <div>
+          <h3><a href="https://github.com/skywardpixel/BirdNest">BirdNest</a></h3>
+          <p>Save videos and GIFs from X, or copy them to the clipboard. A Chrome extension and a small native helper do together what a browser cannot do alone.</p>
+        </div>
+        <span class="meta"><span>Python</span> <span>2026</span></span>
+      </li>
+      <li class="row">
+        <span class="num" lang="ja" aria-hidden="true">四</span>
+        <div>
+          <h3><a href="https://github.com/skywardpixel/tailscale-homelab">Tailscale Homelab</a></h3>
+          <p>Self-hosted services on Docker Compose. Each one has its own Caddy and Tailscale node, so it is reachable only over the tailnet.</p>
+        </div>
+        <span class="meta"><span>Docker</span> <span>2026</span></span>
+      </li>
+      <li class="row">
+        <span class="num" lang="ja" aria-hidden="true">五</span>
+        <div>
+          <h3><a href="https://github.com/skywardpixel/mahjong-scoring-tutor">Mahjong Scoring Tutor</a></h3>
+          <p>Interactive lessons on fu, han and points in Japanese mahjong. <a class="inner" href="https://skywardpixel.github.io/mahjong-scoring-tutor/">Open it</a>.</p>
+        </div>
+        <span class="meta"><span>JavaScript</span> <span>2025</span></span>
+      </li>
+    </ol>
+
+    <h2 class="earlier-title"><span lang="ja" class="tate" aria-hidden="true">昔</span><span class="en">Earlier</span></h2>
+    <ul class="earlier">
+      <li><a href="https://github.com/skywardpixel/trusting-trust-hack">trusting-trust-hack</a><span>Thompson’s compiler hack, in C</span><span class="year">2021</span></li>
+      <li><a href="https://github.com/skywardpixel/mit-ds-labs">mit-ds-labs</a><span>Raft and MapReduce, in Go</span><span class="year">2020</span></li>
+      <li><a href="https://github.com/skywardpixel/alphazero">alphazero</a><span>AlphaZero, reimplemented</span><span class="year">2020</span></li>
+      <li><a href="https://github.com/skywardpixel/facenet-darknet-pytorch">facenet-darknet-pytorch</a><span>FaceNet, ported to PyTorch</span><span class="year">2018</span></li>
+    </ul>
+  </section>
+</main>
+
+<footer class="foot">
+  <p><a href="https://skyward.moe">skyward.moe</a> &ensp; <a href="https://github.com/skywardpixel">github.com/skywardpixel</a></p>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>

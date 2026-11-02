@@ -1,0 +1,318 @@
+@font-face {
+  font-family: "Shippori Mincho";
+  src: url("fonts/shippori-mincho-400.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Zen Kaku Gothic New";
+  src: url("fonts/zen-kaku-gothic-new-400.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Zen Kaku Gothic New";
+  src: url("fonts/zen-kaku-gothic-new-500.woff2") format("woff2");
+  font-weight: 500;
+  font-display: swap;
+}
+
+:root {
+  --paper: #f5f1e8;
+  --ink: #23211e;
+  --muted: #6b665c;
+  --line: #d9d3c5;
+  --shu: #c23a1b;
+  --seal-ink: #f5f1e8;
+  --sky-ink: #27476b;
+  --ridge-ink: #23211e;
+  --disc-ink: #c23a1b;
+
+  --mincho: "Shippori Mincho", "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif CJK JP", serif;
+  --gothic: "Zen Kaku Gothic New", "Hiragino Sans", "Yu Gothic", "Noto Sans CJK JP", sans-serif;
+  --edge: clamp(1.5rem, 5vw, 4.5rem);
+  color-scheme: light;
+}
+
+/* Used only when JS has not set a theme. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --paper: #14161b; --ink: #e8e3d6; --muted: #9c978a; --line: #2d3037;
+    --shu: #e8694a; --seal-ink: #14161b; --sky-ink: #3a5b84; --ridge-ink: #5b6069; --disc-ink: #e8e3d6;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #14161b; --ink: #e8e3d6; --muted: #9c978a; --line: #2d3037;
+  --shu: #e8694a; --seal-ink: #14161b; --sky-ink: #3a5b84; --ridge-ink: #5b6069; --disc-ink: #e8e3d6;
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  background: var(--paper);
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 400 1.0625rem/1.75 var(--gothic);
+  font-feature-settings: "palt";
+  -webkit-font-smoothing: antialiased;
+  transition: background-color .5s ease, color .5s ease;
+}
+
+h1, h2, h3, p, ol, ul { margin: 0; padding: 0; font-weight: 400; }
+ol, ul { list-style: none; }
+
+a { color: inherit; text-decoration: none; }
+:focus-visible { outline: 2px solid var(--shu); outline-offset: 3px; }
+
+.tate {
+  writing-mode: vertical-rl;
+  font-family: var(--mincho);
+  letter-spacing: .3em;
+  line-height: 1;
+}
+
+/* Top line. It floats over the hero so the page opens on empty paper. */
+.top {
+  position: absolute;
+  inset: 0 0 auto 0;
+  z-index: 2;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 1.5rem var(--edge);
+  /* Stop short of the sky panel. */
+  padding-right: calc(var(--edge) + var(--sky-w) + 2rem);
+  font-size: .875rem;
+  --sky-w: clamp(220px, 23vw, 340px);
+}
+.top nav { display: flex; align-items: center; gap: 1.75rem; color: var(--muted); }
+.top nav a { transition: color .2s; }
+.top nav a:hover { color: var(--shu); }
+
+.theme {
+  width: 2rem; height: 2rem;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: none;
+  color: var(--ink);
+  font: 400 .875rem/1 var(--mincho);
+  cursor: pointer;
+  transition: border-color .2s, color .2s;
+}
+.theme:hover { border-color: var(--shu); color: var(--shu); }
+
+/* Hero: text low on the left, wide empty paper above it, and a hanging-scroll
+   sky on the right that runs off the top of the page. */
+.hero {
+  --sky-w: clamp(220px, 23vw, 340px);
+  min-height: 100svh;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto var(--sky-w);
+  column-gap: clamp(1.5rem, 3vw, 3rem);
+  padding: 0 var(--edge);
+}
+
+.hero-text {
+  align-self: end;
+  padding-bottom: clamp(3rem, 11vh, 7rem);
+  max-width: 34rem;
+}
+
+h1 {
+  font: 400 clamp(3.5rem, 9.5vw, 8rem)/1 var(--mincho);
+  letter-spacing: -.01em;
+  white-space: nowrap;
+}
+
+.seal {
+  /* A tall name seal, sized in its own em: a quarter of the heading. */
+  display: inline-block;
+  writing-mode: vertical-rl;
+  font-size: .23em;
+  margin-left: .95em;
+  padding: .28em .14em;
+  vertical-align: .05em;
+  background: var(--shu);
+  color: var(--seal-ink);
+  border-radius: 3px 2px 4px 2px;
+  line-height: 1;
+  letter-spacing: .04em;
+  white-space: nowrap;
+}
+
+.lede {
+  margin-top: 2.25rem;
+  font-size: 1.125rem;
+}
+.aside { margin-top: .5rem; color: var(--muted); }
+
+.season {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: flex-start;
+  gap: .9rem;
+  align-self: end;
+  padding-bottom: clamp(3rem, 11vh, 7rem);
+}
+.season[hidden] { display: none; }
+.season-ja {
+  writing-mode: vertical-rl;
+  font: 400 1.0625rem/1 var(--mincho);
+  letter-spacing: .32em;
+}
+.season-en {
+  writing-mode: vertical-rl;
+  color: var(--muted);
+  font-size: .75rem;
+  line-height: 1;
+  letter-spacing: .06em;
+}
+
+.sky { position: relative; min-height: 100%; }
+.sky canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  image-rendering: pixelated;
+  animation: develop 1.6s ease both;
+}
+@keyframes develop { from { opacity: 0; } }
+
+/* Works */
+.works {
+  display: grid;
+  grid-template-columns: 5.5rem minmax(0, 1fr);
+  row-gap: clamp(5rem, 12vh, 8rem);
+  max-width: 70rem;
+  padding: clamp(5rem, 16vh, 10rem) var(--edge) 0;
+}
+.works h2 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: .6rem;
+  font-size: 1.375rem;
+}
+.works h2 .en {
+  color: var(--muted);
+  font: 400 .75rem/1 var(--gothic);
+  letter-spacing: .06em;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 3.25rem minmax(0, 1fr) 6.5rem;
+  gap: 0 1rem;
+  padding: 1.75rem 0;
+  border-top: 1px solid var(--line);
+}
+.row:last-child { border-bottom: 1px solid var(--line); }
+
+.num {
+  padding-top: .3rem;
+  color: var(--muted);
+  font: 400 1rem/1.5 var(--mincho);
+}
+.row h3 {
+  font: 400 1.625rem/1.3 var(--mincho);
+  letter-spacing: .005em;
+}
+.row h3 a { transition: color .2s; }
+.row:hover h3 a, .row h3 a:focus-visible { color: var(--shu); }
+.row p {
+  margin-top: .4rem;
+  max-width: 38rem;
+  color: var(--muted);
+  font-size: 1rem;
+}
+.inner {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--line);
+  text-decoration-thickness: 1px;
+  text-underline-offset: .22em;
+  transition: text-decoration-color .2s;
+}
+.inner:hover { text-decoration-color: var(--shu); }
+
+.meta {
+  padding-top: .45rem;
+  text-align: right;
+  color: var(--muted);
+  font-size: .8125rem;
+  line-height: 1.6;
+}
+
+.meta span { display: block; }
+
+.earlier li {
+  display: grid;
+  grid-template-columns: minmax(0, 15rem) minmax(0, 1fr) 3rem;
+  gap: 0 1rem;
+  padding: .5rem 0;
+  font-size: .9375rem;
+  color: var(--muted);
+}
+.earlier a { color: var(--ink); transition: color .2s; }
+.earlier a:hover { color: var(--shu); }
+.earlier .year { text-align: right; }
+
+.foot {
+  max-width: 70rem;
+  margin-top: clamp(6rem, 18vh, 11rem);
+  padding: 0 var(--edge) 3rem;
+  padding-left: calc(var(--edge) + 5.5rem);
+  color: var(--muted);
+  font-size: .8125rem;
+}
+.foot a { color: var(--ink); white-space: nowrap; }
+.foot a:hover { color: var(--shu); }
+
+/* Narrow screens: the scroll becomes a short band on top of the page. */
+@media (max-width: 760px) {
+  .top { padding-right: var(--edge); }
+  .hero {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    padding: 5rem 0 0;
+  }
+  .sky { order: -1; height: 44svh; min-height: 0; }
+  .hero-text { padding: 2.5rem var(--edge) 0; align-self: auto; }
+  .season {
+    align-self: auto;
+    flex-direction: column;
+    gap: .4rem;
+    padding: 2rem var(--edge) 0;
+  }
+  .season-ja, .season-en { writing-mode: horizontal-tb; }
+  .season-en { line-height: 1.4; }
+
+  .works { grid-template-columns: minmax(0, 1fr); row-gap: 1.5rem; }
+  .works h2 { flex-direction: row; align-items: baseline; gap: .75rem; }
+  .works h2 .tate { writing-mode: horizontal-tb; }
+  .earlier-title { margin-top: 2.5rem; }
+  .row { grid-template-columns: 2rem minmax(0, 1fr); }
+  .meta { grid-column: 2; text-align: left; padding-top: .6rem; }
+  .meta span { display: inline; }
+  .meta span + span { margin-left: .75em; }
+  .earlier li { grid-template-columns: minmax(0, 1fr) 3rem; }
+  .earlier li span:not(.year) { grid-column: 1; grid-row: 2; }
+  .earlier .year { grid-column: 2; grid-row: 1; }
+  .foot { padding-left: var(--edge); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  body { transition: none; }
+  .sky canvas { animation: none; }
+}
