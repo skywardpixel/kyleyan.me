@@ -5,6 +5,8 @@
   "workers_dev": false,
   "routes": [
     { "pattern": "www.kyleyan.me", "custom_domain": true },
+    { "pattern": "kyleyan.com", "custom_domain": true },
+    { "pattern": "www.kyleyan.com", "custom_domain": true },
     { "pattern": "www.skyward.moe", "custom_domain": true }
   ]
 }
