@@ -1,0 +1,10 @@
+{
+  "name": "www-redirect",
+  "main": "index.js",
+  "compatibility_date": "2026-11-01",
+  "workers_dev": false,
+  "routes": [
+    { "pattern": "www.kyleyan.me", "custom_domain": true },
+    { "pattern": "www.skyward.moe", "custom_domain": true }
+  ]
+}
